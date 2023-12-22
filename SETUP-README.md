@@ -12,8 +12,14 @@ Clone the appropriate model into the `./models` directory. Using vicuna here as 
 
 ```
 cd models
-git clone git clone https://huggingface.co/lmsys/vicuna-7b-v1.3
+git clone https://huggingface.co/lmsys/vicuna-7b-v1.3
 ```
+
+There are some big files in the repo, cloning it will only create placeholders. The following files must be downloaded from huggingface and replace the placeholders in the `models/vicuna-7b-v1.3` directory.
+
+-   `pytorch_model-00002-of-00002.bin`
+-   `pytorch_model-00001-of-00002.bin`
+-   `tokenizer.model`
 
 Go back to the root directory, create a python virtual environment and install the dependencies
 
@@ -29,7 +35,7 @@ Convert the huge LLM from float16 to int4. Note, the `convert-pth-to-ggml.py` in
 python convert.py models/vicuna-7b-v1.3/
 ```
 
-Quantize it, whatever that means. Using the f16 gguf file, this will produce a new bin file.
+Quantize it, this is the step that actually converts it from a float16 to int4. Using the f16 gguf file, this will produce a new bin file. This will result in a loss in quality, but makes it possible to run on low-spec hardware.
 
 ```
 ./quantize ./models/vicuna-7b-v1.3/ggml-model-f16.gguf ./models/vicuna-7b-v1.3/ggml-model-q4_0.bin 2
@@ -38,7 +44,7 @@ Quantize it, whatever that means. Using the f16 gguf file, this will produce a n
 Run a quick test
 
 ```
-./main -m ./models/vicuna-7b-v1.3/ggml-model-qa_0.bin -n 128
+./main -m ./models/vicuna-7b-v1.3/ggml-model-q4_0.bin -n 128
 ```
 
 Run the model in interactive mode

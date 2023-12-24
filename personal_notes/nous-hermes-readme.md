@@ -19,5 +19,5 @@ Run a quick test
 Run the model in interactive mode
 
 ```
-./main -m ./models/Nous-Hermes-13b/ggml-model-q4_0.bin -t 4 -c 2048 -n 2048 --color -i --reverse-prompt '### Instruction:' -p '### Instruction:'
+./main -m ./models/Nous-Hermes-13b/ggml-model-q4_0.bin -t 4 -c 2048 -n 2048 --color -i --reverse-prompt '### Instruction: ' -p '### Instruction: '
 ```
